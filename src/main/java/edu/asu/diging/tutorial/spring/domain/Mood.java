@@ -27,7 +27,7 @@ public class Mood {
 			// TODO Auto-generated method stub
 			if(this == obj)
 				return true;
-			
+			System.out.print(((Mood)obj).feeling);
 			return feeling.equals(((Mood)obj).getFeeling());
 		}
 	    

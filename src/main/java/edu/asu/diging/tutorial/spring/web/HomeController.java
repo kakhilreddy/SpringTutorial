@@ -19,24 +19,12 @@ public class HomeController {
 	private MoodService moodService;
 	
 	@RequestMapping(value = "/")
-	public String home( HttpServletRequest request) {
+	public String home( ModelMap map) {
 		Mood mood = moodService.getCurrentMood();
-		
-		
-		request.getSession().setAttribute("mood", mood);
+		map.addAttribute("mood", mood);
 	
-	    return "index2";
+	    return "home";
 	}
 	
-	@RequestMapping(value = "/moodReason")
-	public String moodReason(HttpServletRequest request) {
-		
-		Mood mood = (Mood) request.getSession().getAttribute("mood");
-		
-		
-		request.getSession().setAttribute("feeling", moodService.getMoodReason(mood));
-		
-		
-		return "index3";
-	}
+	
 }

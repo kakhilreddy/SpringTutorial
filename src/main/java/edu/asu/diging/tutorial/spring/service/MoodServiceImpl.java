@@ -9,22 +9,24 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Service;
 
+import edu.asu.diging.tutorial.spring.domain.Explanation;
 import edu.asu.diging.tutorial.spring.domain.Mood;
+import edu.asu.diging.tutorial.spring.domain.MoodUtil;
 
 @Service
 public class MoodServiceImpl implements MoodService {
 	
 	
 	Random rand;
-	HashMap<Mood,Mood> moodList;
+	HashMap<Mood,Explanation> moodList;
 	
 	@PostConstruct
 	public void init() {
 		moodList = new HashMap<>();
-		moodList.put(new Mood("happy"), new Mood("i ate chicken"));
+		moodList.put(MoodUtil.getMood("happy"), new Explanation("i ate chicken"));
 		
-		moodList.put(new Mood("sad"), new Mood("didn't catch any mice today"));
-		moodList.put(new Mood("excited"), new Mood("Holidays!!"));
+		moodList.put(MoodUtil.getMood("sad"), new Explanation("didn't catch any mice today"));
+		moodList.put(MoodUtil.getMood("excited"), new Explanation("Holidays!!"));
 		rand = new Random();
 	}
 	public Mood getCurrentMood() {
@@ -34,10 +36,14 @@ public class MoodServiceImpl implements MoodService {
 		return moods.get(rand.nextInt(moodList.size()));
 	}
 	@Override
-	public Mood getMoodReason(Mood mood) {
+	public Explanation getExplanation(String mood) {
 		// TODO Auto-generated method stub
-		return moodList.get(mood);
+		
+				return moodList.get(MoodUtil.getMood(mood));
+				
+				
 		
 	}
+
 
 }
